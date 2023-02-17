@@ -1,0 +1,63 @@
+﻿@using NLayer.Service.Paging
+@using Nlayer.Core.DTOs
+@model PaginatedList<ProductsWithCategoryDto>
+@{
+    ViewData["Title"] = "Index";
+}
+<a class="btn btn-info" asp-controller="Products" asp-action="Save">Ürün Ekle</a>
+<br />
+<table class="table table-striped">
+        <thead>
+            <tr>
+            <td>No</td>
+            <td></td>
+            <td>Ürün Adı</td>
+            <td>Alış Fiyatı</td>
+            <td>Satış Fiyatı</td>
+            <td>Stok</td>
+            <td>Kategori</td>
+            <td></td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.productId</td>
+                    <td>
+                        <a asp-controller="Sales" asp-action="Add" asp-route-prodId="@item.productId" class="btn btn-outline-primary btn-sm" style="border-radius:80px;padding:0px 5px;">+</a>
+                        <a class="btn btn-outline-danger btn-sm" style="border-radius:80px;padding:0px 7px;">-</a>
+                    </td>
+                     <td>@item.productName</td>
+                     <td>@item.purchasePrice</td>
+                     <td>@item.salePrice</td>
+                     <td>@item.stock</td>
+                     <td>@item.Category.categoryName</td>
+                      <td>
+                        <a class="btn btn-warning" asp-controller="Products" asp-action="Update" asp-route-id="@item.productId">Güncelle</a>
+                        <a class="btn btn-danger" asp-controller="Products" asp-action="Delete" asp-route-id="@item.productId">Sil</a>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+        </table>
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+         }
+
+            <a asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               class="btn btn-default @prevDisabled">
+                <
+            </a>
+            <span>@(Model.PageIndex)</span>
+            <a asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               class="btn btn-default @nextDisabled">
+                >
+            </a>
+            
+

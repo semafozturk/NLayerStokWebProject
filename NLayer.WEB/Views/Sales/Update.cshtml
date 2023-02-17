@@ -1,0 +1,50 @@
+﻿@model Nlayer.Core.DTOs.SaleDto
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+
+<h4>SaleDto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="saleId" class="control-label"></label>
+                <input asp-for="saleId" class="form-control" />
+                <span asp-validation-for="saleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="salesQuantity" class="control-label"></label>
+                <input asp-for="salesQuantity" class="form-control" />
+                <span asp-validation-for="salesQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="saleDate" class="control-label"></label>
+                <input asp-for="saleDate" class="form-control" />
+                <span asp-validation-for="saleDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="comment" class="control-label"></label>
+                <input asp-for="comment" class="form-control" />
+                <span asp-validation-for="comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="productId"></label>
+                <select asp-for="productId" asp-items="ViewBag.products" class="form-control" ></select>
+               
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

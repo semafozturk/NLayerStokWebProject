@@ -1,0 +1,136 @@
+﻿@using NLayer.Service.Paging
+@using Nlayer.Core.DTOs
+@model List<SalesWithProductDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a class="btn btn-info" asp-controller="Products" asp-action="Save">Ürün Ekle</a>
+<a class="btn btn-info addSaleButton" asp-controller="Sales" asp-action="AddWithoutID">Satış Ekle</a>
+<br />
+<table class="table table-striped">
+        <thead>
+            <tr>
+            <td>Ürün Adı</td>
+            <td>Satış Adedi</td>
+            <td>Satış Fiyatı</td>
+            <td>Toplam Tutar</td>
+            <td>Satış Tarihi</td>
+            <td>Açıklama</td>
+            <td></td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                     <td>@item.Product.productName</td>
+                     <td>@item.salesQuantity</td>
+                     <td>@item.Product.salePrice</td>
+                     
+                @{
+                    decimal price = @item.Product.salePrice;
+                    int quantity = @item.salesQuantity;
+                    var total = price * quantity;
+                    <td>@total.ToString()</td>
+                    }
+                     
+                     <td>@item.saleDate</td>
+                     <td style="font-size:13px;">@item.comment</td>
+                      <td>
+                        <a class="btn btn-warning" asp-controller="Sales" asp-action="Update" asp-route-id="@item.saleId">Güncelle</a>
+                        <a class="btn btn-danger" asp-controller="Sales" asp-action="Delete" asp-route-id="@item.saleId">Sil</a>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+        </table>
+
+        <form method="post" enctype="multipart/form-data" asp-controller="Sales" asp-action="Report">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input class="btn btn-primary" type="submit" value="Rapor" />
+                </div>
+            </div>
+        </form>
+
+       @* @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+         }
+
+            <a asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               class="btn btn-default @prevDisabled">
+                <
+            </a>
+            <span>@(Model.PageIndex)</span>
+            <a asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               class="btn btn-default @nextDisabled">
+                >
+            </a>*@
+
+
+
+
+
+@*
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.saleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.salesQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.saleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.saleId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.salesQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.saleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+*@

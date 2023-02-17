@@ -1,0 +1,73 @@
+﻿@using Nlayer.Core.DTOs
+@model SalesWithProductDto
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add</h1>
+
+<h4>Sale</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label>Satış Adedi</label>
+                <input asp-for="salesQuantity" class="form-control" id="salesQuantity" />
+                <span asp-validation-for="salesQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Satış Tarihi</label>
+                <input asp-for="saleDate" class="form-control" />
+                <span asp-validation-for="saleDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Not</label>
+                <input asp-for="comment" class="form-control" />
+                <span asp-validation-for="comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <input hidden="true" class="form-control" value="@ViewBag.prodId" asp-for="productId" id="productId"/>
+
+                <div class="form-group">
+                <label>Kategori</label>
+                <select asp-for="Product.categoryId" asp-items="ViewBag.products" class="form-control" id="products"></select>
+               
+                    @{
+                        var price = (Model.Product.salePrice);
+                        <label hidden id="price">@price</label>
+                        <label id="total"></label>
+                        } 
+                </div>
+            
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+            $('#salesQuantity').on('change',function(){
+                var price=$('#price').text();
+                $('#total').text("Toplam Satış Tutarı : "+(price*parseInt(this.value)));
+            });
+            var productId=$('#productId').val();
+            $('#products').val(productId);
+            $('#products').on("change",function(){
+                $('#productId').val(this.value);
+            });
+    });
+</script>
+

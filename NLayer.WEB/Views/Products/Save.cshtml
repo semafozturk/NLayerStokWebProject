@@ -1,0 +1,59 @@
+﻿@using Nlayer.Core.DTOs
+@model ProductDto
+@{
+    ViewData["Title"] = "Save";
+}
+
+<h1>Save</h1>
+
+<div class="row">
+
+    <div  class=col-md-6>
+
+        <form asp-action="Save" method="post" asp-controller="Products">
+
+            <div class="form-group">
+                <label>Ürün Adı</label>
+                <input asp-for="productName" class="form-control" />
+                <span asp-validation-for="productName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Alış Fiyatı</label>
+                <input asp-for="purchasePrice" class="form-control" />
+                <span asp-validation-for="purchasePrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Satış Fiyatı</label>
+                <input asp-for="salePrice" class="form-control" />
+                <span asp-validation-for="salePrice" class="text-danger"></span>
+            </div>
+
+
+              <div class="form-group">
+                <label>Stok</label>
+                <input asp-for="stock" class="form-control" />
+                <span asp-validation-for="stock" class="text-danger"></span>
+            </div>
+
+
+               <div class="form-group">
+                <label>Kategori</label>
+                <select asp-for="categoryId" asp-items="ViewBag.categories" class="form-control" ></select>
+               
+            </div>
+            <br />
+            <div class="form-group">
+
+                <input type="submit" value="Kaydet" class="bootstrap-btn" />
+
+            </div>
+        </form>
+
+
+
+    </div>
+
+
+</div>

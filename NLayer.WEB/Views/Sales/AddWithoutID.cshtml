@@ -1,0 +1,51 @@
+﻿@using Nlayer.Core.DTOs
+@model SaleDto
+@{
+    ViewData["Title"] = "Save";
+}
+
+<h1>Satış Ekle</h1>
+
+<div class="row">
+
+    <div  class=col-md-6>
+
+        <form asp-action="AddWithoutID" method="post" asp-controller="Sales">
+
+            <div class="form-group">
+                <label>Satış Adedi</label>
+                <input asp-for="salesQuantity" class="form-control" />
+                <span asp-validation-for="salesQuantity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Satış Tarihi</label>
+                <input asp-for="saleDate" class="form-control" />
+                <span asp-validation-for="saleDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Ürünler</label>
+                <select asp-for="productId" asp-items="ViewBag.products" class="form-control" ></select>
+               </div>
+
+            <div class="form-group">
+                <label>Not</label>
+                <input asp-for="comment" class="form-control" />
+                <span asp-validation-for="comment" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+
+                <input type="submit" value="Kaydet" class="bootstrap-btn" />
+
+            </div>
+        </form>
+
+
+
+    </div>
+
+
+</div>
